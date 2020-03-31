@@ -63,6 +63,11 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'endpoint' => env('AWS_URL'),
         ],
+        'uploads' => [
+            'driver' => 'local',
+            'root' => 'uploads',
+            'url' => 'uploads',
+        ],
 
     ],
 
