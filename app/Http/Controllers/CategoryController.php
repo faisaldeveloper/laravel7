@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\CategoryDataTable;
+use App\Http\Requests;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Repositories\CategoryRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
 use Flash;
+use App\Http\Controllers\AppBaseController;
 use Response;
 
 class CategoryController extends AppBaseController
@@ -23,16 +24,12 @@ class CategoryController extends AppBaseController
     /**
      * Display a listing of the Category.
      *
-     * @param Request $request
-     *
+     * @param CategoryDataTable $categoryDataTable
      * @return Response
      */
-    public function index(Request $request)
+    public function index(CategoryDataTable $categoryDataTable)
     {
-        $categories = $this->categoryRepository->all();
-
-        return view('categories.index')
-            ->with('categories', $categories);
+        return $categoryDataTable->render('categories.index');
     }
 
     /**
@@ -66,7 +63,7 @@ class CategoryController extends AppBaseController
     /**
      * Display the specified Category.
      *
-     * @param int $id
+     * @param  int $id
      *
      * @return Response
      */
@@ -86,7 +83,7 @@ class CategoryController extends AppBaseController
     /**
      * Show the form for editing the specified Category.
      *
-     * @param int $id
+     * @param  int $id
      *
      * @return Response
      */
@@ -106,7 +103,7 @@ class CategoryController extends AppBaseController
     /**
      * Update the specified Category in storage.
      *
-     * @param int $id
+     * @param  int              $id
      * @param UpdateCategoryRequest $request
      *
      * @return Response
@@ -131,9 +128,7 @@ class CategoryController extends AppBaseController
     /**
      * Remove the specified Category from storage.
      *
-     * @param int $id
-     *
-     * @throws \Exception
+     * @param  int $id
      *
      * @return Response
      */
