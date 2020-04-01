@@ -29,9 +29,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('categories', 'CategoryController');
-
-Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->middleware('verified');
-
-Route::resource('products', 'ProductController');

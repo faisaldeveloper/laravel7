@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "204c5a0af21fc32a78f72e97e71d10e1",
+    "content-hash": "89f976ea13a1ea6c615faf6f58b35f3c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -945,17 +945,17 @@
             "time": "2019-07-01T23:21:34+00:00"
         },
         {
-            "name": "infyomlabs/coreui-templates",
+            "name": "infyomlabs/adminlte-templates",
             "version": "7.0.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/InfyOmLabs/coreui-templates.git",
-                "reference": "08724393e06883f8f79f1afb2b720380a84bfdbd"
+                "url": "https://github.com/InfyOmLabs/adminlte-templates.git",
+                "reference": "c182e6cf940162d39a7fb62ba7aa9a329982fc3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/InfyOmLabs/coreui-templates/zipball/08724393e06883f8f79f1afb2b720380a84bfdbd",
-                "reference": "08724393e06883f8f79f1afb2b720380a84bfdbd",
+                "url": "https://api.github.com/repos/InfyOmLabs/adminlte-templates/zipball/c182e6cf940162d39a7fb62ba7aa9a329982fc3e",
+                "reference": "c182e6cf940162d39a7fb62ba7aa9a329982fc3e",
                 "shasum": ""
             },
             "require": {
@@ -966,13 +966,13 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "\\InfyOm\\CoreUITemplates\\CoreUITemplatesServiceProvider"
+                        "\\InfyOm\\AdminLTETemplates\\AdminLTETemplatesServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "InfyOm\\CoreUITemplates\\": "src/"
+                    "InfyOm\\AdminLTETemplates\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -985,16 +985,16 @@
                     "email": "me@mitul.me"
                 }
             ],
-            "description": "CoreUI templates for InfyOm Laravel Generator",
+            "description": "AdminLTE templates for InfyOm Laravel Generator",
             "keywords": [
+                "AdminLTE",
                 "bootstrap",
-                "coreui",
                 "generator",
                 "infyom",
                 "laravel",
                 "templates"
             ],
-            "time": "2020-03-28T04:50:35+00:00"
+            "time": "2020-03-14T06:48:45+00:00"
         },
         {
             "name": "infyomlabs/laravel-generator",
@@ -6406,7 +6406,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "infyomlabs/laravel-generator": 20,
-        "infyomlabs/coreui-templates": 20
+        "infyomlabs/adminlte-templates": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
