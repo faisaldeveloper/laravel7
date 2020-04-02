@@ -28,7 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
-Route::resource('categories', 'CategoryController');
+Route::resource('categories', 'CategoryController')->middleware('auth');
 
 Auth::routes(['verify' => true]);
 

@@ -191,7 +191,7 @@ return [
 
         'updated_at'    => 'updated_at',
 
-        'deleted_at'    => 'deleted_at',
+        //'deleted_at'    => 'deleted_at',
     ],
 
     /*
