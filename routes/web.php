@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {    return view('welcome'); });
+
+Route::get('/', function () {    return redirect('home'); });
+
+
+Route::get('/allcategories', 'CategoryController@showall')->name('fetch_all');
+//Route::get('/showallcategories', function () {    return 'in test controller'; });
+
 
 Auth::routes();
 
@@ -26,12 +31,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'post'], function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-
-Route::resource('categories', 'CategoryController')->middleware('auth');
-
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->middleware('verified');
+//Route::get('/home', 'HomeController@index')->middleware('verified');
 
-Route::resource('products', 'ProductController');
+Route::get('allproducts', 'ProductController@index');
