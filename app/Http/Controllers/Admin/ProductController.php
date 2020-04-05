@@ -100,6 +100,10 @@ class ProductController extends AppBaseController
             return redirect(route('products.index'));
         }
 
+        if(\Gate::denies('update-product', $product)){
+            abort(403, "Access denied");
+        }
+
         return view('products.edit')->with('product', $product);
     }
 
@@ -140,6 +144,10 @@ class ProductController extends AppBaseController
     public function destroy($id)
     {
         $product = $this->productRepository->find($id);
+
+        if(\Gate::denies('delete-product', $product)){
+            abort(403, "Access denied");
+        }
 
         if (empty($product)) {
             Flash::error('Product not found');

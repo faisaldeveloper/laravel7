@@ -42,4 +42,8 @@ class ProductRepository extends BaseRepository
     {
         return Product::class;
     }
+
+    public function getallproductswithcats(){
+        return Product::with('category')->get();
+    }
 }

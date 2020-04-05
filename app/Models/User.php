@@ -39,8 +39,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function products()
+    {
+        return $this->hasMany(\App\Models\Product::class, 'user_id');
+    }
+
     public function posts(){
-        return $this->hasMany('App\Models\Post');
+        return $this->hasMany('App\Models\Post', 'user_id');
     }
 
     public function isAdmin(){

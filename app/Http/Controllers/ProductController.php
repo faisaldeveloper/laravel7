@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Repositories\ProductRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use App\Models\Product;
 use Flash;
 use Response;
 
@@ -29,7 +30,9 @@ class ProductController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $products = $this->productRepository->all();
+        $products = $this->productRepository->getallproductswithcats();
+        //$products = Product::with('category')->get();
+        //die($products);
 
         return view('products.index')
             ->with('products', $products);
