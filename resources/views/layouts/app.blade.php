@@ -60,7 +60,7 @@
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="{{ asset('images/my-logo2.png') }}""
+                                    <img src="{{ asset('images/my-logo2.png') }}"
                                          class="img-circle" alt="User Image"/>
                                     <p>
                                         {{ Auth::user()->name }}
@@ -126,6 +126,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/post/get_all') }}">Post</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

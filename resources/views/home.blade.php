@@ -26,7 +26,9 @@
   </div>
 </div>
 
-
+<div class="col-md-6 posts-container" style="height: 35rem; overflow-y: scroll">
+  <all-posts />
+</div>
 
 
 </div>

@@ -14,25 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::get('/', function () {    return view('welcome'); });
-
 Route::get('/', function () {    return redirect('home'); });
 
+Route::get('/allcategories', 'CategoryController@showall')->name('all-categories');
+Route::get('allproducts', 'ProductController@index')->name('all-products');
 
-Route::get('/allcategories', 'CategoryController@showall')->name('fetch_all');
-//Route::get('/showallcategories', function () {    return 'in test controller'; });
-
+Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->middleware('verified');
 
 Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => 'auth', 'prefix' => 'post'], function () {
     Route::get('get_all', 'PostController@getAllPosts')->name('fetch_all');
     Route::post('create_post', 'PostController@createPost')->name('create_post');
 });
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes(['verify' => true]);
-
-//Route::get('/home', 'HomeController@index')->middleware('verified');
-
-Route::get('allproducts', 'ProductController@index');

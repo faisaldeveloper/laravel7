@@ -51,7 +51,28 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Post', 'user_id');
     }
 
+    //This function is being called from blade views to show buttons
     public function isAdmin(){
+        if(\Auth::check()){
+            $email = \Auth::user()->email;
+            if($email == 'superadmin@test.com' || $email == 'admin@test.com'){
+                return true;
+            } else{
+                return true;
+            }           
+        }
+    }
+
+    public function isNotAdmin(){
+        if(\Auth::check()){
+            $email = \Auth::user()->email;
+            if($email != 'superadmin@test.com' && $email != 'admin@test.com'){
+                return true;
+            }            
+        }
+    }
+
+    public function isSuperAdmin(){
         return true;
     }
 }
