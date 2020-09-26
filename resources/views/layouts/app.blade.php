@@ -126,7 +126,12 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    @if (!Auth::guest())
                     <li><a href="{{ url('/post/get_all') }}">Post</a></li>
+                    @endif
+                    <li><a href="{{ url('/allcategories') }}">Categories</a></li>
+                    <li><a href="{{ url('/allproducts') }}">Products</a></li>
+                    <li><a href="{{ url('/gallery') }}">Gallery</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
