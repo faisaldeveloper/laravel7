@@ -2,12 +2,31 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Eloquent as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Album
+ * @package App\Models
+ * @version September 26, 2020, 3:42 pm UTC
+ *
+ * @property \Illuminate\Database\Eloquent\Collection $photos
+ * @property string $album_name
+ * @property string $album_description
+ */
 class Album extends Model
 {
-    //const CREATED_AT = 'created_at';
-    //const UPDATED_AT = 'updated_at';
+    use SoftDeletes;
+
+    public $table = 'albums';
+    
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
+
+    protected $dates = ['deleted_at'];
+
+
 
     public $fillable = [
         'album_name',
@@ -31,16 +50,17 @@ class Album extends Model
      * @var array
      */
     public static $rules = [
-        'album_name' => 'required'
+        'album_name' => 'required|string|max:255',
+        'album_description' => 'nullable|string|max:255',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable'
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function Photo()
+    public function photos()
     {
         return $this->hasMany(\App\Models\Photo::class, 'album_id');
     }
-
-
 }

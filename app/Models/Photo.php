@@ -2,10 +2,34 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Eloquent as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Photo
+ * @package App\Models
+ * @version September 26, 2020, 3:42 pm UTC
+ *
+ * @property \App\Models\Album $album
+ * @property string $photo_name
+ * @property string $photo_description
+ * @property string $photo_path
+ * @property integer $album_id
+ */
 class Photo extends Model
 {
+    use SoftDeletes;
+
+    public $table = 'photos';
+    
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
+
+    protected $dates = ['deleted_at'];
+
+
+
     public $fillable = [
         'photo_name',
         'photo_description',
@@ -32,17 +56,19 @@ class Photo extends Model
      * @var array
      */
     public static $rules = [
-        'photo_name' => 'required',
-        'photo_description' => 'required',
-        'photo_path' => 'required',
-        'album_id' => 'required'
+        'photo_name' => 'required|string|max:255',
+        'photo_description' => 'nullable|string|max:255',
+        'photo_path' => 'required|string|max:255',
+        'album_id' => 'required',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable'
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function Album()
+    public function album()
     {
-        return $this->belongsTo(\App\Models\Album::class, 'id');
+        return $this->belongsTo(\App\Models\Album::class, 'album_id');
     }
 }

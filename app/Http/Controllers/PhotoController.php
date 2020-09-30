@@ -2,84 +2,155 @@
 
 namespace App\Http\Controllers;
 
-use App\Photo;
-use Illuminate\Http\Request;
+use App\DataTables\PhotoDataTable;
+use App\Http\Requests;
+use App\Http\Requests\CreatePhotoRequest;
+use App\Http\Requests\UpdatePhotoRequest;
+use App\Repositories\PhotoRepository;
+use Flash;
+use App\Http\Controllers\AppBaseController;
+use Response;
 
-class PhotoController extends Controller
+use DB;
+
+class PhotoController extends AppBaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    /** @var  PhotoRepository */
+    private $photoRepository;
+
+    public function __construct(PhotoRepository $photoRepo)
     {
-        //
+        $this->photoRepository = $photoRepo;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the Photo.
      *
-     * @return \Illuminate\Http\Response
+     * @param PhotoDataTable $photoDataTable
+     * @return Response
+     */
+    public function index(PhotoDataTable $photoDataTable)
+    {
+        return $photoDataTable->render('photos.index');
+    }
+
+    /**
+     * Show the form for creating a new Photo.
+     *
+     * @return Response
      */
     public function create()
     {
-        //
+        return view('photos.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Photo in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreatePhotoRequest $request
+     *
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(CreatePhotoRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $photo = $this->photoRepository->create($input);
+
+        Flash::success('Photo saved successfully.');
+
+        return redirect(route('photos.index'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Photo.
      *
-     * @param  \App\Photo  $photo
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function show(Photo $photo)
+    public function show($id)
     {
-        //
+        $photo = $this->photoRepository->find($id);
+
+        if (empty($photo)) {
+            Flash::error('Photo not found');
+
+            return redirect(route('photos.index'));
+        }
+
+        return view('photos.show')->with('photo', $photo);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Photo.
      *
-     * @param  \App\Photo  $photo
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function edit(Photo $photo)
+    public function edit($id)
     {
-        //
+        $photo = $this->photoRepository->find($id);
+        $albums = DB::table('albums')->pluck('album_name', 'id');
+
+        //print_r($albums);     exit;
+
+        if (empty($photo)) {
+            Flash::error('Photo not found');
+
+            return redirect(route('photos.index'));
+        }
+
+        return view('photos.edit')->with('photo', $photo)->with('albums', $albums);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Photo in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Photo  $photo
-     * @return \Illuminate\Http\Response
+     * @param  int              $id
+     * @param UpdatePhotoRequest $request
+     *
+     * @return Response
      */
-    public function update(Request $request, Photo $photo)
+    public function update($id, UpdatePhotoRequest $request)
     {
-        //
+        $photo = $this->photoRepository->find($id);
+
+        if (empty($photo)) {
+            Flash::error('Photo not found');
+
+            return redirect(route('photos.index'));
+        }
+
+        $photo = $this->photoRepository->update($request->all(), $id);
+
+        Flash::success('Photo updated successfully.');
+
+        return redirect(route('photos.index'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Photo from storage.
      *
-     * @param  \App\Photo  $photo
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function destroy(Photo $photo)
+    public function destroy($id)
     {
-        //
+        $photo = $this->photoRepository->find($id);
+
+        if (empty($photo)) {
+            Flash::error('Photo not found');
+
+            return redirect(route('photos.index'));
+        }
+
+        $this->photoRepository->delete($id);
+
+        Flash::success('Photo deleted successfully.');
+
+        return redirect(route('photos.index'));
     }
 }
