@@ -41,7 +41,9 @@ class PhotoController extends AppBaseController
      */
     public function create()
     {
-        return view('photos.create');
+        $albums = DB::table('albums')->pluck('album_name', 'id');
+
+        return view('photos.create')->with('albums', $albums);
     }
 
     /**
@@ -54,6 +56,11 @@ class PhotoController extends AppBaseController
     public function store(CreatePhotoRequest $request)
     {
         $input = $request->all();
+        
+        $imageName = time().'.'.$request->photo_path->extension();
+        $request->photo_path->move(public_path('images'), $imageName);
+
+        $input['photo_path'] = $imageName;
 
         $photo = $this->photoRepository->create($input);
 

@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::get('/', function () {    return view('welcome'); });
-Route::get('/', function () {    return redirect('home'); });
+Route::get('/', function () {
+ 	return redirect('home'); 
+});
 
 Route::get('/allcategories', 'CategoryController@showall')->name('all-categories');
 Route::get('allproducts', 'ProductController@index')->name('all-products');

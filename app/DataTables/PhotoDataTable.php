@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Photo;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Illuminate\Support\Str;
 
 class PhotoDataTable extends DataTable
 {
@@ -18,7 +19,16 @@ class PhotoDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'photos.datatables_actions');
+        return $dataTable
+        ->addColumn('photo_path', function($data){
+            $contains = Str::contains($data->photo_path, '/');
+            if($contains) $src = $data->photo_path;
+            else $src = asset('images/'.$data->photo_path);
+            
+            return '<img src="'.$src.'" width="40" height="40" alt="image" />';
+        })
+        ->addColumn('action', 'photos.datatables_actions')
+        ->rawColumns(['photo_path', 'action']);
     }
 
     /**
@@ -65,14 +75,15 @@ class PhotoDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'photo_path' => new \Yajra\DataTables\Html\Column(['title' => 'Photo', 'data' => 'photo_path', 'name' => 'id']),
             'photo_name',
-            'photo_description',
-            'photo_path',
+            'photo_description',           
             
             //'photo_path' => new \Yajra\DataTables\Html\Column(['title' => 'Photo', 'data' => <img src="$photo_path'" width="30" alt="Product image" />, 'name' => 'photo_name']),
             // 'author_name' => new \Yajra\DataTables\Html\Column(['title' => 'Author Name', 'data' => 'author.name', 'name' => 'author.name'])
-            //'album_id'
+            //'id' => new \Yajra\DataTables\Html\Column(['title' => 'TIGEE', 'data' => 'id', 'name' => 'album.id']),     
             'album_id' => new \Yajra\DataTables\Html\Column(['title' => 'Album', 'data' => 'album.album_name', 'name' => 'album.album_name'])
+            //'album_id'
         ];
     }
 

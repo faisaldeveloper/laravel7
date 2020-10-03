@@ -58,7 +58,8 @@ class Photo extends Model
     public static $rules = [
         'photo_name' => 'required|string|max:255',
         'photo_description' => 'nullable|string|max:255',
-        'photo_path' => 'required|string|max:255',
+        //'photo_path' => 'required|string|max:255',
+        'photo_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'album_id' => 'required',
         'created_at' => 'nullable',
         'updated_at' => 'nullable'
