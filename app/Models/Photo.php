@@ -50,6 +50,11 @@ class Photo extends Model
         'album_id' => 'integer'
     ];
 
+    public function setPhotoNameAttribute($photo_name)
+    {
+        $this->attributes['photo_name'] = $photo_name;
+    }
+
     /**
      * Validation rules
      *

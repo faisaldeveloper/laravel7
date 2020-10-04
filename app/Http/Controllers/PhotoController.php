@@ -11,6 +11,9 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
+use PDF;
+use Barryvdh\Snappy;
+
 use DB;
 
 class PhotoController extends AppBaseController

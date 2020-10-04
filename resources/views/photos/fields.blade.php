@@ -1,12 +1,12 @@
 <!-- Photo Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('photo_name', 'Photo Name:') !!}
+    {!! Form::label('photo_name', 'Name:') !!}
     {!! Form::text('photo_name', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
 <!-- Photo Description Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('photo_description', 'Photo Description:') !!}
+    {!! Form::label('photo_description', 'Description:') !!}
     {!! Form::text('photo_description', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 

@@ -1,12 +1,12 @@
 <!-- Photo Name Field -->
 <div class="form-group">
-    {!! Form::label('photo_name', 'Photo Name:') !!}
+    {!! Form::label('photo_name', 'Name:') !!}
     <p>{{ $photo->photo_name }}</p>
 </div>
 
 <!-- Photo Description Field -->
 <div class="form-group">
-    {!! Form::label('photo_description', 'Photo Description:') !!}
+    {!! Form::label('photo_description', 'Description:') !!}
     <p>{{ $photo->photo_description }}</p>
 </div>
 
